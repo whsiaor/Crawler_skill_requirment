@@ -6,7 +6,7 @@ class Visualize:
     file = "ranking.csv"
 
     @classmethod
-    def bar(cls):     
+    def bar(cls):
         df = pd.read_csv(cls.file)
 
         key = df["Keyword"]
@@ -19,7 +19,7 @@ class Visualize:
 
 
     @classmethod
-    def bar_h(cls):     
+    def bar_h(cls):
         df = pd.read_csv(cls.file)
 
         key = df["Keyword"]
@@ -38,12 +38,12 @@ class Visualize:
         value = df["Frequency"]
 
         word_freq_dict = dict(zip(key, value))
-        wordcloud = WordCloud(width=2732, height=2048, background_color='white').generate_from_frequencies(word_freq_dict)
+        wordcloud = WordCloud(width=800, height=600, background_color='white').generate_from_frequencies(word_freq_dict)
 
-        plt.figure(figsize=(27.3, 20.4))
+        plt.figure(figsize=(8, 6))
         plt.imshow(wordcloud, interpolation='bilinear')
         plt.axis('off')
-        plt.savefig("wordcloud2.png", bbox_inches='tight')
+        plt.savefig("wordcloud.png", bbox_inches='tight')
         plt.show()
 
 if __name__ == "__main__":
