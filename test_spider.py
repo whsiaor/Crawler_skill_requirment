@@ -1,10 +1,10 @@
 from bs4 import BeautifulSoup
-from info import Spider
-import pytest 
+from main import Spider
+import pytest
 import os
 import re
 
-url = "https://www.seek.com.au/Developer-jobs" 
+url = "https://www.seek.com.au/Developer-jobs"
 
 @pytest.fixture
 def spider():
@@ -26,7 +26,7 @@ def test_keywords():
         matches = re.findall(r'\w*/?\s?\.?\w+#*\+*\s?\w*', skill)
         keywords.extend(matches)
     assert skills == keywords
- 
+
 def test_save_csv(spider):
     spider.save_csv()
     # Assert that the file exists

@@ -15,13 +15,13 @@ class Spider:
         self.base_url = "https://www.seek.com.au"
         self.param = "/developer-jobs?page={}"
         self.total_pages = 20
-        self.list = "list.txt"
-        self.file_name = "ranking1.csv"
+        self.list = "skill_list.txt"
+        self.file_name = "ranking.csv"
         self.counter = Counter()
 
     # get reques
     def get_res(self, url):
-        max_retries = 3  # 最大重試次數
+        max_retries = 3
         retries = 0
         while retries < max_retries:
             try:
@@ -32,14 +32,14 @@ class Spider:
             except requests.exceptions.HTTPError as e:
                 if e.response.status_code == 429:
                     print("Too many requests. Retrying after a delay...")
-                    time.sleep(1)  # 在這裡增加一個延遲，例如10秒
+                    time.sleep(1)
                     retries += 1
                     continue
                 else:
                     raise
             except RequestException :
                 raise RequestException
-            
+
         raise Exception("Failed to get response from the URL after multiple retries.")
 
 
@@ -57,9 +57,16 @@ class Spider:
 
         if len(sub_urls) < 1:
             raise ValueError("No links found on the page")
-        
+
         return sub_urls
-    
+
+
+
+
+    # Process sub URLs
+    def to_sub_urls(self, sub_urls):
+        for sub_url in tqdm(sub_urls, desc="Iterating description finding keywords", leave=False):
+            self.in_sub_url(sub_url)
 
     # Extract keywords from a text file
     def get_keywords(self):
@@ -67,24 +74,17 @@ class Spider:
             file = file.read()
             keywords = re.findall(r'\w*/? ?\.?\w+#*\+* ?\w*', file)
             return keywords
-    
-
-    # Process sub URLs 
-    def to_sub_urls(self, sub_urls):
-        for sub_url in tqdm(sub_urls, desc="Iterating description finding keywords", leave=False):
-            self.in_sub_url(sub_url)
-
 
     # Lookup keywords in description and update counter
     def in_sub_url(self, sub_url):
-        keywords = self.get_keywords() 
+        keywords = self.get_keywords()
         # Go to page and finding description
         url = self.base_url + sub_url
         response = self.get_res(url)
         soup = BeautifulSoup(response.text, 'lxml')
         # Find the tag
         details = soup.find('div', {'data-automation': 'jobAdDetails'})
-        text = details.find_all('li') 
+        text = details.find_all('li')
         # Clean description
         text = [re.sub(r'[,.?!]$', '', li.text.strip()) for li in text]
 
@@ -97,7 +97,7 @@ class Spider:
                     found.add(word)
         for key in found:
             self.counter[key] += 1
- 
+
 
     # Save keyword frequencies to a CSV file
     def save_csv(self):
@@ -112,7 +112,7 @@ class Spider:
         total_pages = self.total_pages if total is None else total
         with open(self.file_name, 'w') as file:
             pass
-        
+
         for page in tqdm(range(1, total_pages + 1), desc="Total", leave=False):
             url = self.base_url + self.param.format(page)
             links = self.find_sub_urls(url)
@@ -126,4 +126,4 @@ if __name__ == "__main__":
     spider.crawl_pages() # Insert how many search pages you want to crawl for, defalt=20, every page got 22 links
 
     # Visualize.cloud() # Ouuput word cloud image
-    # Visualize.bar() # Output bar chart 
+    # Visualize.bar() # Output bar chart
