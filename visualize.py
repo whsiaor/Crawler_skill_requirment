@@ -38,9 +38,9 @@ class Visualize:
         value = df["Frequency"]
 
         word_freq_dict = dict(zip(key, value))
-        wordcloud = WordCloud(width=800, height=600, background_color='white').generate_from_frequencies(word_freq_dict)
+        wordcloud = WordCloud(width=1800, height=1600, background_color='white').generate_from_frequencies(word_freq_dict)
 
-        plt.figure(figsize=(8, 6))
+        plt.figure(figsize=(18, 16))
         plt.imshow(wordcloud, interpolation='bilinear')
         plt.axis('off')
         plt.savefig("wordcloud.png", bbox_inches='tight')
