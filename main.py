@@ -61,12 +61,11 @@ class Spider:
         return sub_urls
 
 
-
-
     # Process sub URLs
     def to_sub_urls(self, sub_urls):
         for sub_url in tqdm(sub_urls, desc="Iterating description finding keywords", leave=False):
             self.in_sub_url(sub_url)
+
 
     # Extract keywords from a text file
     def get_keywords(self):
@@ -74,6 +73,7 @@ class Spider:
             file = file.read()
             keywords = re.findall(r'\w*/? ?\.?\w+#*\+* ?\w*', file)
             return keywords
+
 
     # Lookup keywords in description and update counter
     def in_sub_url(self, sub_url):
