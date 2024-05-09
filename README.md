@@ -54,6 +54,7 @@ Run program:
 python main.py
 ```
 >   Upon execution, the program fetches data and saves it directly in the ranking.csv file. By default, it performs keyword analysis once and generates a word cloud image. If you want to additionally generate a bar chart, you don't have to run all program again, just simply comment out the scrip and uncomment `Visualize.bar()` before running the program again, it will using the data you just generated and produce a bar chart. See exemple:
+
 ```
 # spider = Spider()
 # spider.crawl_pages() 
@@ -61,6 +62,8 @@ python main.py
 
 Visualize.bar()
 ```
+
+> The data `ranking.csv` will reset every time you run the `test_spider.py` or `spider.crawl_pages()`.
 
 ## Bar chart
 ![bar](bar_v.png)
