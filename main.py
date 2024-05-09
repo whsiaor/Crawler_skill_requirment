@@ -125,5 +125,5 @@ if __name__ == "__main__":
     spider = Spider()
     spider.crawl_pages() # Insert how many search pages you want to crawl for, defalt=20, every page got 22 links
 
-     Visualize.cloud() # Ouuput word cloud image
+    Visualize.cloud() # Ouuput word cloud image
     # Visualize.bar() # Output bar chart
