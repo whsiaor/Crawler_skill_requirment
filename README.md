@@ -1,5 +1,5 @@
 # Seek_Spider
-![worldcloud](wordcloud(ipad).png)
+![worldcloud](wordcloud.png)
 ## About
 This program will gather data on Develop jobs associated with programming languages from Seek.com.au. Its purpose is to offer insights for individuals intrigued by programming, helping them discern the prevalent tools used by Australian companies. Moreover, the program can generate visualizations to enhance the clarity of identified trends. This comprehensive resource will aid individuals in identifying appropriate learning pathways.
 
