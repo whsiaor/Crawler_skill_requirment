@@ -15,7 +15,7 @@ class Spider:
         self.base_url = "https://www.seek.com.au"
         self.param = "/developer-jobs?page={}"
         self.total_pages = 20
-        self.list = "skill_list.txt"
+        self.list = "keywords.txt"
         self.file_name = "ranking.csv"
         self.counter = Counter()
 
