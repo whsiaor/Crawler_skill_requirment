@@ -47,7 +47,7 @@ git clone https://github.com/whsiaor/Seek_Spider.git && cd Seek_Spider
 ```
 Installation:
 ```bash
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 Run program:
 ```
